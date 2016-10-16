@@ -32,18 +32,22 @@
                 <h2>Plan your event</h2>
                 <p>Let's plan your next event together, shall we?</p>
             </div>
-            <form>
+            <form data-abide novalidate>
                 <fieldset class="fieldset">
                     <legend>Event details</legend>
                     <div class="row">
                         <div class="medium-6 columns">
                             <label>Event name
-                                <input type="text" placeholder="After school party" autocomplete required autofocus>
+                                <input type="text" placeholder="e.g 'After school party'" min="5" required autofocus autocomplete aria-describedby="eventHelpText">
+                                <span class="form-error">
+                                  Don't leave this empty
+                                </span>
                             </label>
+                            <p class="help-text" id="eventHelpText">Minimum of 5 characters.</p>
                         </div>
                         <div class="medium-6 columns">
                             <label>Event type
-                                <input list='eventType' type='text' autocomplete placeholder="choose event type" required>
+                                <input list='eventType' type='text' autocomplete placeholder="Choose event type" required>
                                 <datalist id="eventType">
                                     <select name="eventType">
                                         <option></option>
@@ -53,6 +57,9 @@
                                         <option>Other</option>
                                     </select>
                                 </datalist>
+                                <span class="form-error">
+                                  Don't leave this empty
+                                </span>
                             </label>
                         </div>
                     </div>
@@ -67,11 +74,17 @@
                                         <option value="organization">organization</option>
                                     </select>
                                 </datalist>
+                                <span class="form-error">
+                                  Don't leave this empty
+                                </span>
                             </label>
                         </div>
                         <div class="medium-6 columns">
                             <label>Event location
                                 <input type="text" autocomplete placeholder="NY City" required />
+                                <span class="form-error">
+                                  Don't leave this empty
+                                </span>
                             </label>
                         </div>
                     </div>
@@ -106,7 +119,7 @@
     </div>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/what-input/what-input.js"></script>
-    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.min.js"></script>
     <script src="js/app.js"></script>
     <script src="node_modules/foundation-datepicker/js/foundation-datepicker.min.js"></script>
     <script>

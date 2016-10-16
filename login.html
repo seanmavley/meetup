@@ -31,13 +31,13 @@
                 <h2>Welcome to Meet Up</h2>
                 <p>Setup events and share with friends quickly.</p>
             </div>
-            <form>
+            <form data-abide novalidate>
                 <fieldset class="fieldset">
                     <legend>Login</legend>
                     <div class="row">
                         <div class="small-6 columns">
                             <label>Email
-                                <input type="email" placeholder="my@email.com" required>
+                                <input type="email" placeholder="my@email.com" required autofocus>
                             </label>
                         </div>
                         <div class="small-6 columns">
@@ -57,7 +57,7 @@
     </div>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/what-input/what-input.js"></script>
-    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 
