@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create event - MeetUp App</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/mycss.css">
+    <link rel="stylesheet" href="css/icons/foundation-icons.css" />
+    <link rel="stylesheet" href="node_modules/foundation-datepicker/css/foundation-datepicker.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="small-12 medium-10 medium-centered columns">
+            <div class="menu-centered">
+                <ul class="menu">
+                    <li><a class="button hollow" href="/">Home</a></li>
+                    <li><a class="button success" href="create_event.html">Create Event</a></li>
+                    <li><a class="button hollow" href="list_events.html">Events</a></li>
+                    <li><a class="button hollow" href="login.html">login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="large-8 large-centered small-12">
+            <div class="callout secondary">
+                <h2>Plan your event</h2>
+                <p>Let's plan your next event together, shall we?</p>
+            </div>
+            <form>
+                <fieldset class="fieldset">
+                    <legend>Event details</legend>
+                    <div class="row">
+                        <div class="medium-6 columns">
+                            <label>Event name
+                                <input type="text" placeholder="After school party" autocomplete required autofocus>
+                            </label>
+                        </div>
+                        <div class="medium-6 columns">
+                            <label>Event type
+                                <input list='eventType' type='text' autocomplete placeholder="choose event type" required>
+                                <datalist id="eventType">
+                                    <select name="eventType">
+                                        <option></option>
+                                        <option value="Birthday">Birthday</option>
+                                        <option value="Conference">Conference</option>
+                                        <option value="Wedding">Wedding</option>
+                                        <option>Other</option>
+                                    </select>
+                                </datalist>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="medium-6 columns">
+                            <label>Event host
+                                <input list='eventHost' type='text' placeholder="Individual or Organization" required autocomplete />
+                                <datalist id="eventHost">
+                                    <select name="eventHost">
+                                        <option></option>
+                                        <option value="individual">Individual</option>
+                                        <option value="organization">organization</option>
+                                    </select>
+                                </datalist>
+                            </label>
+                        </div>
+                        <div class="medium-6 columns">
+                            <label>Event location
+                                <input type="text" autocomplete placeholder="NY City" required />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-6 columns">
+                            <label>Start date
+                                <input type="datetime" id="dateOne" required></input>
+                            </label>
+                        </div>
+                        <div class="small-6 columns">
+                            <label>End date
+                                <input type="datetime" id="dateTwo">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="medium-6 columns">
+                            <label>Guest list
+                                <textarea placeholder="Enter guest names, one each line" rows="3"></textarea>
+                            </label>
+                        </div>
+                        <div class="medium-6 columns">
+                            <label>Optional message
+                                <textarea placeholder="Any message to add about the above event?" rows="3"></textarea>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="submit" class="button"></input>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/what-input/what-input.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="node_modules/foundation-datepicker/js/foundation-datepicker.min.js"></script>
+    <script>
+    $(function() {
+        // implementation of disabled form fields
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        var start_date = $('#dateOne').fdatepicker({
+            onRender: function(date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function(ev) {
+            if (ev.date.valueOf() > end_date.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                end_date.update(newDate);
+            }
+            start_date.hide();
+            $('#dateTwo')[0].focus();
+        }).data('datepicker');
+        var end_date = $('#dateTwo').fdatepicker({
+            onRender: function(date) {
+                return date.valueOf() <= start_date.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function(ev) {
+            end_date.hide();
+        }).data('datepicker');
+    });
+    </script>
+</body>
+
+</html>
