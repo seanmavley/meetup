@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create event - MeetUp App</title>
     <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/mycss.css">
     <link rel="stylesheet" href="css/icons/foundation-icons.css" />
     <link rel="stylesheet" href="node_modules/foundation-datepicker/css/foundation-datepicker.css">
 </head>
@@ -28,6 +27,10 @@
     <div class="divider"></div>
     <div class="row">
         <div class="large-8 large-centered small-12">
+            <div class="callout alert" id="locationError" style="display:none;">
+                <h2>Geolocation not supported</h2>
+                <p>Stop using Internet Explorer. Switch to a modern browser!</p>
+            </div>
             <div class="callout secondary">
                 <h2>Plan your event</h2>
                 <p>Let's plan your next event together, shall we?</p>
@@ -48,14 +51,12 @@
                         <div class="medium-6 columns">
                             <label>Event type
                                 <input list='eventType' type='text' autocomplete placeholder="Choose event type" required>
-                                <datalist id="eventType">
-                                    <select name="eventType">
-                                        <option></option>
-                                        <option value="Birthday">Birthday</option>
-                                        <option value="Conference">Conference</option>
-                                        <option value="Wedding">Wedding</option>
-                                        <option>Other</option>
-                                    </select>
+                                <datalist id="eventType" name="eventType">
+                                    <option></option>
+                                    <option value="Birthday">Birthday</option>
+                                    <option value="Conference">Conference</option>
+                                    <option value="Wedding">Wedding</option>
+                                    <option>Other</option>
                                 </datalist>
                                 <span class="form-error">
                                   Don't leave this empty
@@ -67,12 +68,10 @@
                         <div class="medium-6 columns">
                             <label>Event host
                                 <input list='eventHost' type='text' placeholder="Individual or Organization" required autocomplete />
-                                <datalist id="eventHost">
-                                    <select name="eventHost">
-                                        <option></option>
-                                        <option value="individual">Individual</option>
-                                        <option value="organization">organization</option>
-                                    </select>
+                                <datalist id="eventHost" name="eventHost">
+                                    <option></option>
+                                    <option value="individual">Individual</option>
+                                    <option value="organization">organization</option>
                                 </datalist>
                                 <span class="form-error">
                                   Don't leave this empty
@@ -81,11 +80,19 @@
                         </div>
                         <div class="medium-6 columns">
                             <label>Event location
-                                <input type="text" autocomplete placeholder="NY City" required />
-                                <span class="form-error">
-                                  Don't leave this empty
-                                </span>
+                                <div class="input-group">
+                                    <input class="input-group-field" type="text" id="location" autocomplete required aria-describedby="status">
+                                    <div class="input-group-button">
+                                        <a class="button" onclick="getLocation()">Get location</a>
+                                    </div>
+                                    <span class="form-error">
+                                        Don't leave this empty
+                                    </span>
+                                </div>
                             </label>
+                            <p id="status" class="help-text">
+                                Click the button to get your position.
+                            </p>
                         </div>
                     </div>
                     <div class="row">
@@ -123,6 +130,44 @@
     <script src="js/app.js"></script>
     <script src="node_modules/foundation-datepicker/js/foundation-datepicker.min.js"></script>
     <script>
+    //
+    // Check if we can get geo location and show it on a map in case we can.
+    //
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            var status = document.getElementById("locationError");
+            status.style.display = 'block';
+        }
+    }
+
+    function showPosition(position) {
+        console.log('showPosition I am in action');
+        var geoPoint = position.coords.latitude + "," + position.coords.longitude;
+        console.log(position.coords.latitude + ' ' + position.coords.longitude);
+        document.getElementById('location').value = position.coords.latitude + ', ' + position.coords.longitude;
+    }
+
+    // show our errors for debuging
+    function showError(error) {
+        var x = document.getElementById("status");
+        x.style.color = 'red';
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "Denied the request for Geolocation. Maybe, ask the user in a more polite way?"
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = "The request to get location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = "An unknown error occurred :(";
+                break;
+        }
+    }
     $(function() {
         // implementation of disabled form fields
         var nowTemp = new Date();
