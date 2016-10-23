@@ -35,12 +35,15 @@
                 <p>Let's plan your next event together, shall we?</p>
             </div>
             <form data-abide novalidate>
+                <div data-abide-error class="alert callout" style="display: none;">
+                    <p><i class="fi-alert"></i> All fields are required, except 'Guest list' or 'Message'.</p>
+                </div>
                 <fieldset class="fieldset">
                     <legend>Event details</legend>
                     <div class="row">
                         <div class="medium-6 columns">
                             <label>Event name
-                                <input type="text" placeholder="e.g 'After school party'" min="5" required autofocus autocomplete aria-describedby="eventHelpText">
+                                <input type="text" placeholder="e.g 'After school party'" min="5" required autofocus autocomplete aria-describedby="eventHelpText" />
                                 <span class="form-error">
                                   Don't leave this empty
                                 </span>
@@ -49,7 +52,7 @@
                         </div>
                         <div class="medium-6 columns">
                             <label>Event type
-                                <input list='eventType' type='text' autocomplete placeholder="Choose event type" required>
+                                <input list='eventType' type='text' autocomplete placeholder="Choose event type" required />
                                 <span class="form-error">
                                   Don't leave this empty
                                 </span>
@@ -130,7 +133,11 @@
                             </label>
                         </div>
                     </div>
-                    <input type="submit" class="button"></input>
+                    <div class="row">
+                        <div class="small-12 colums">
+                            <input type="submit" class="button" />
+                        </div>
+                    </div>
                 </fieldset>
             </form>
         </div>
