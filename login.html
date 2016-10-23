@@ -36,14 +36,20 @@
                         <div class="small-6 columns">
                             <label>Email
                                 <input type="email" placeholder="my@email.com" required autofocus>
+                                <span class="form-error">
+                                  Invalid email format
+                                </span>
                             </label>
                         </div>
                         <div class="small-6 columns">
                             <label>Password
                                 <!-- Taken from here
                             http://stackoverflow.com/a/21456918/1757321
-                            The longest regex I've ever seen in my life-->
+                            The one of the long regex I've ever seen in my life-->
                                 <input type="password" placeholder="********" max="32" min="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required aria-describedby="passwordHelpText">
+                                <span class="form-error">
+                                  Please match the criteria below
+                                </span>
                             </label>
                             <p class="help-text" id="passwordHelpText">Minimum 8 characters at least 1 Alphabet, and 1 Number</p>
                         </div>
