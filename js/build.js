@@ -41,27 +41,14 @@ function showError(error) {
 };
 
 $(function() {
-  // implementation of disabled form fields
-  var nowTemp = new Date();
-  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-  var start_date = $('#dateOne').fdatepicker({
-    onRender: function(date) {
-      return date.valueOf() < now.valueOf() ? 'disabled' : '';
-    }
-  }).on('changeDate', function(ev) {
-    if (ev.date.valueOf() > end_date.date.valueOf()) {
-      var newDate = new Date(ev.date)
-      newDate.setDate(newDate.getDate() + 1);
-      end_date.update(newDate);
-    }
-    start_date.hide();
-    $('#dateTwo')[0].focus();
-  }).data('datepicker');
-  var end_date = $('#dateTwo').fdatepicker({
-    onRender: function(date) {
-      return date.valueOf() <= start_date.date.valueOf() ? 'disabled' : '';
-    }
-  }).on('changeDate', function(ev) {
-    end_date.hide();
-  }).data('datepicker');
+    $('#dateOne').fdatepicker({
+      format: 'mm-dd-yyyy hh:ii',
+      disableDblClickSelection: true,
+      pickTime: true
+    });    
+    $('#dateTwo').fdatepicker({
+      format: 'mm-dd-yyyy hh:ii',
+      disableDblClickSelection: true,
+      pickTime: true
+    });
 });

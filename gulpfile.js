@@ -17,6 +17,7 @@ var sassPaths = [
 gulp.task('serve', function() {
   browser.init({ server: '.', port: port });
   gulp.watch('*.html').on('change', browser.reload);
+  gulp.watch(['css/*.css', 'js/*.js'], ['scripts']);
 });
 
 gulp.task('sass', function() {
@@ -45,4 +46,6 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('js'));
 });
 
-gulp.task('default', ['serve', 'sass', 'scripts']);
+gulp.task('build', ['sass', 'scripts']);
+
+gulp.task('default', ['serve', 'sass']);

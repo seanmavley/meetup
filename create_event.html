@@ -97,13 +97,25 @@
                     <div class="row">
                         <div class="small-6 columns">
                             <label>Start date
-                                <input type="datetime" id="dateOne" required></input>
+                                <input type="text" id="dateOne" required aria-describedby="startDate">
+                                <span class="form-error">
+                                    Don't leave this empty
+                                </span>
                             </label>
+                            <p id="startDate" class="help-text">
+                                Select date and time event will begin
+                            </p>
                         </div>
                         <div class="small-6 columns">
                             <label>End date
-                                <input type="datetime" id="dateTwo">
+                                <input type="text" id="dateTwo" required aria-describedby="endDate">
+                                <span class="form-error">
+                                    Don't leave this empty
+                                </span>
                             </label>
+                            <p id="startDate" class="help-text">
+                                Select date and time event will end
+                            </p>
                         </div>
                     </div>
                     <div class="row">
