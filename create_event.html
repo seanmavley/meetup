@@ -83,7 +83,7 @@
                         <div class="medium-6 columns">
                             <label>Event location
                                 <div class="input-group">
-                                    <input class="input-group-field" type="text" id="location" autocomplete required aria-describedby="status">
+                                    <input class="input-group-field" type="text" id="location" autocomplete required aria-describedby="status" />
                                     <div class="input-group-button">
                                         <a class="button" onclick="getLocation()">Get location</a>
                                     </div>
@@ -124,7 +124,10 @@
                     <div class="row">
                         <div class="medium-6 columns">
                             <label>Guest list
-                                <textarea placeholder="Enter guest names, one each line" rows="3"></textarea>
+                                <textarea placeholder="Enter guest names, one each line" rows="3" required></textarea>
+                                <span class="form-error">
+                                    Don't leave this empty
+                                </span>
                             </label>
                         </div>
                         <div class="medium-6 columns">
